@@ -1,0 +1,24 @@
+{
+  "name": "brdf_goniochromism",
+  "version": "1.0.0",
+  "description": "![Goniochromism](https://blogs.unity3d.com/wp-content/uploads/2017/12/beetle-pimp-our_1.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdoardoLenzi9/BRDF_Goniochromism.git"
+  },
+  "author": "Edoardo Lenzi",
+  "license": "WTFPL-2.0",
+  "bugs": {
+    "url": "https://github.com/EdoardoLenzi9/BRDF_Goniochromism/issues"
+  },
+  "homepage": "https://github.com/EdoardoLenzi9/BRDF_Goniochromism#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1"
+  }
+}
