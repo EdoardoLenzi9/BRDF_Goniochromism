@@ -1,128 +1,37 @@
 /*
-* Coil shader material defition
+* Emissive shader material defition
 *
-* author = 'Edoardo Lenzi'
+* author = 'Marco Iuri, Edoardo Lenzi'
 * version = '1.0'
-* license = 'WTFPL-2.0'
+* license = 'GPL-3.0'
 */
 
-function InitCoil(){
-    //Material 14: coil alluminum 1
-    var coilRough = 0.1;
-    var coilRMap = LoadTexture('../../assets/models/acc_coil/acc_coil_copper_RM.png');
-    var coilDMap = LoadTexture('../../assets/models/acc_coil/acc_coil_copper_D.png');
-    var coilNMap = LoadTexture('../../assets/models/acc_coil/acc_coil_copper_NM.png');
-    var aoMap = LoadTexture('../../assets/models/acc_coil/acc_coil_copper_AO.png');
-    coilAll1 = new THREE.ShaderMaterial(
-        {
-            uniforms: {
-                "frameBaseColor": {type: "v3", value: new THREE.Vector3(0.913, 0.922, 0.924)},
-                "frameRoughness": {type: "f",  value: coilRough},
-                "coilBaseColor": {type: "t", value: coilDMap},
-                "coilRoughness": {type: "t", value: coilRMap},
-                "coilNormalMap": {type: "t", value: coilNMap},
-                "aoMap": {type: "t", value: aoMap},
-                "pointLightWorldPosition": {type: "v3", value: new THREE.Vector3(dirLight.position.x, dirLight.position.y, dirLight.position.z)},
-                "pointLightColor": {type: "v3", value: pointLightColor},
-                "envLightColor": {type: "v3", value: envLightColor},
-                "envMap": {type:"t", value: environmentMaps[Math.floor(coilRough * 8)]},
-                "diffOnly": {type: "f", value: 0.0}
-            },
-            vertexShader: 'coil-vertex',
-            fragmentShader: 'coil-fragment',
-            vertexColors: THREE.VertexColors
-        }
-    )
 
-    //Material 15: coil alluminum 2
-    coilRough = 0.5;
-    coilAll2 = new THREE.ShaderMaterial(
+function InitChair(){    
+    //Material 0: blue emissive
+    blueEmissive = new THREE.ShaderMaterial(
         {
-            uniforms: {
-                "frameBaseColor": {type: "v3", value: new THREE.Vector3(0.913, 0.922, 0.924)},
-                "frameRoughness": {type: "f",  value: coilRough},
-                "coilBaseColor": {type: "t", value: coilDMap},
-                "coilRoughness": {type: "t", value: coilRMap},
-                "coilNormalMap": {type: "t", value: coilNMap},
-                "aoMap": {type: "t", value: aoMap},
-                "pointLightWorldPosition": {type: "v3", value: new THREE.Vector3(dirLight.position.x, dirLight.position.y, dirLight.position.z)},
-                "pointLightColor": {type: "v3", value: pointLightColor},
-                "envLightColor": {type: "v3", value: envLightColor},
-                "envMap": {type:"t", value: environmentMaps[Math.floor(coilRough * 8)]},
-                "diffOnly": {type: "f", value: 0.0}
-            },
-            vertexShader: 'coil-vertex',
-            fragmentShader: 'coil-fragment',
-            vertexColors: THREE.VertexColors
+            uniforms: {'emissiveColor': {type: 'v3', value: new THREE.Vector3(0.6, 0.8, 1.0)}},
+            vertexShader:   'emissive-vertex',
+            fragmentShader: 'emissive-fragment'
         }
-    )
+    );
+    
+    //Material 1: red emissive
+    redEmissive = new THREE.ShaderMaterial(
+        {
+            uniforms: {'emissiveColor': {type: 'v3', value: new THREE.Vector3(1.0, 0.8, 0.6)}},
+            vertexShader:   'emissive-vertex',
+            fragmentShader: 'emissive-fragment'
+        }
+    );
 
-    //Material 16: coil gold 1
-    coilRough = 0.1;
-    coilGold1 = new THREE.ShaderMaterial(
+    //Material 2: green emissive
+    greenEmissive = new THREE.ShaderMaterial(
         {
-            uniforms: {
-                "frameBaseColor": {type: "v3", value: new THREE.Vector3(1.0, 0.782, 0.344)},
-                "frameRoughness": {type: "f",  value: coilRough},
-                "coilBaseColor": {type: "t", value: coilDMap},
-                "coilRoughness": {type: "t", value: coilRMap},
-                "coilNormalMap": {type: "t", value: coilNMap},
-                "aoMap": {type: "t", value: aoMap},
-                "pointLightWorldPosition": {type: "v3", value: new THREE.Vector3(dirLight.position.x, dirLight.position.y, dirLight.position.z)},
-                "pointLightColor": {type: "v3", value: pointLightColor},
-                "envLightColor": {type: "v3", value: envLightColor},
-                "envMap": {type:"t", value: environmentMaps[Math.floor(coilRough * 8)]},
-                "diffOnly": {type: "f", value: 0.0}
-            },
-            vertexShader: 'coil-vertex',
-            fragmentShader: 'coil-fragment',
-            vertexColors: THREE.VertexColors
+            uniforms: {'emissiveColor': {type: 'v3', value: new THREE.Vector3(0.6, 1.0, 0.8)}},
+            vertexShader:   'emissive-vertex',
+            fragmentShader: 'emissive-fragment'
         }
-    )
-
-    //Material 17: coil gold 2
-    coilRough = 0.5;
-    coilGold2 = new THREE.ShaderMaterial(
-        {
-            uniforms: {
-                "frameBaseColor": {type: "v3", value: new THREE.Vector3(1.0, 0.782, 0.344)},
-                "frameRoughness": {type: "f",  value: coilRough},
-                "coilBaseColor": {type: "t", value: coilDMap},
-                "coilRoughness": {type: "t", value: coilRMap},
-                "coilNormalMap": {type: "t", value: coilNMap},
-                "aoMap": {type: "t", value: aoMap},
-                "pointLightWorldPosition": {type: "v3", value: new THREE.Vector3(dirLight.position.x, dirLight.position.y, dirLight.position.z)},
-                "pointLightColor": {type: "v3", value: pointLightColor},
-                "envLightColor": {type: "v3", value: envLightColor},
-                "envMap": {type:"t", value: environmentMaps[Math.floor(coilRough * 8)]},
-                "diffOnly": {type: "f", value: 0.0}
-            },
-            vertexShader: 'coil-vertex',
-            fragmentShader: 'coil-fragment',
-            vertexColors: THREE.VertexColors
-        }
-    )
-
-    //Material 18: coil dark iron 1
-    coilRough = 0.4;
-    coilIron1 = new THREE.ShaderMaterial(
-        {
-            uniforms: {
-                "frameBaseColor": {type: "v3", value: new THREE.Vector3(0.112, 0.113, 0.116)},
-                "frameRoughness": {type: "f",  value: coilRough},
-                "coilBaseColor": {type: "t", value: coilDMap},
-                "coilRoughness": {type: "t", value: coilRMap},
-                "coilNormalMap": {type: "t", value: coilNMap},
-                "aoMap": {type: "t", value: aoMap},
-                "pointLightWorldPosition": {type: "v3", value: new THREE.Vector3(dirLight.position.x, dirLight.position.y, dirLight.position.z)},
-                "pointLightColor": {type: "v3", value: pointLightColor},
-                "envLightColor": {type: "v3", value: envLightColor},
-                "envMap": {type:"t", value: environmentMaps[Math.floor(coilRough * 8)]},
-                "diffOnly": {type: "f", value: 0.0}
-            },
-            vertexShader: 'coil-vertex',
-            fragmentShader: 'coil-fragment',
-            vertexColors: THREE.VertexColors
-        }
-    )
+    );
 }

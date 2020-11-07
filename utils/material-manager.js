@@ -14,7 +14,10 @@ var chair;
 var environmentMaps = new Array();
 
 var todo = new Set([
-    'chair', 
+    'chair-vertex', 
+    'chair-fragment', 
+    'sky-vertex',
+    'sky-fragment'
 ]);
 
 var pointLightColor = new THREE.Vector3();
@@ -34,14 +37,17 @@ function InitMaterials()
                                        hemiLight.color.b * hemiLight.intensity);
     
     // Init materials definitions
-
+    InitChair();
+    InitSkyBox();
 
     // Add material definitions to the materialVector
-
+    materialVector.push(skyMaterial);   // Sky map
 
     // Load glsl shaders from file
     LoadGlsl('../../shaders/chair/fragment.glsl');
     LoadGlsl('../../shaders/chair/vertex.glsl');
+    LoadGlsl('../../shaders/skybox/vertex.glsl');
+    LoadGlsl('../../shaders/skybox/fragment.glsl');
 }
 
 

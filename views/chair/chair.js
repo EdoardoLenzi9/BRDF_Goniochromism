@@ -33,29 +33,24 @@ function Init() {
 	InitScene();
 	InitMaterials();
 	InitCamera();
-
-	// init scene and camera pose
-	group.rotation.z += Math.PI / 4;
-	group.rotation.y += Math.PI / 2;
 	camera.position.set( 150, 0, 150 );
-	scene.add( group );
-		
-	// desktop events
-	BindEvent( window, 'mousemove', OnDocumentMouseMove );
-	BindEvent( document, 'mousedown', OnMouseDown );
-	BindEvent( document, 'mouseup', OnMouseUp );
-	// touch screen events
-	BindEvent( document, 'touchmove', OnDocumentMouseMove );
-	BindEvent( document, 'touchstart', OnMouseDown );
-	BindEvent( document, 'touchend', OnMouseUp );
-	// general events
-	BindEvent( window, 'resize', OnWindowResize );
-	BindEvent( window, 'click', OnDocumentMouseClick );
-
-	skyMesh = new THREE.Mesh(new THREE.SphereBufferGeometry(500, 64, 64), skyMaterial);
-	scene.add(skyMesh);
 
 	InitRenderer();
+	LoadMesh();
+
+	sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 16, 8), new THREE.MeshBasicMaterial({color: "red", wireframe: true}));
+	group.add(sphere)
+
+	// init scene and camera pose
+	scene.add( group );
+		
+	// general events
+	BindEvent( window, 'resize', OnWindowResize );
+
+	// skyMesh = new THREE.Mesh(new THREE.SphereBufferGeometry(500, 64, 64), skyMaterial);
+	skyMesh = new THREE.Mesh(new THREE.SphereBufferGeometry(500, 64, 64), new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true, opacity: 0.5}));
+	scene.add(skyMesh);
+
 	Animate();
 }
 
@@ -63,25 +58,11 @@ function Init() {
 /*
 * Given a component definition loads the component and add it to the scene
 */ 
-function SetupMesh( parameters ) {
+function LoadMesh( ) {
 	var loader = new THREE.GLTFLoader();
-	loader.load( parameters.url, function( gltf ) {
-		var gltfMesh = gltf.scene.children[ 0 ];
-		if( parameters.repeat > 0 ){
-			var component = new THREE.Group();
-			component.add( new AnimatedMesh( gltfMesh, parameters ) );
-			for( var i = 0; i < parameters.repeat; i++ ){
-				var new_component = component.clone();
-				group.add(new AnimatedGroup( new_component, ( ( 2 * Math.PI * i ) / 10 ) ));
-			}
-		} else {
-			group.add(new AnimatedMesh( gltfMesh, parameters ));
-		}
-
-		loadedComponents ++;
-		if(loadedComponents == architecture.length - 1){
-			glbLoaded = true;
-		}
+	loader.load( "../../assets/models/chair.glb", function( gltf ) {
+		var gltfMesh = gltf.scene;
+		group.add(gltfMesh);
 	});
 }
 
