@@ -12,16 +12,20 @@ var camera, scene, renderer, controls, stats;
 var clock = new THREE.Clock();
 var group = new THREE.Group();
 
+
 // Lights
 var hemiLight, dirLight;
+
 
 // Materials
 var materialVector = new Array();
 
+
 // Skybox
 var skyMesh;
 var skyMaterial;
-var chairMaterial;
+var metalMaterial;
+var goniochromismMaterial;
 
 
 /*
@@ -62,7 +66,7 @@ function InitMesh( ) {
 	var loader = new THREE.GLTFLoader();
 	loader.load( "../../assets/models/chair.glb", function( gltf ) {
 		var gltfMesh = gltf.scene.children[2];
-		gltfMesh.material = chairMaterial;
+		gltfMesh.material = metalMaterial;
 		group.add(gltfMesh);
 	});
 }

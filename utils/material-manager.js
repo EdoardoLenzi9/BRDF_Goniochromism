@@ -14,8 +14,10 @@ var chair;
 var environmentMaps = new Array();
 
 var todo = new Set([
-    'chair-vertex', 
-    'chair-fragment', 
+    'metal-vertex', 
+    'metal-fragment',
+    'goniochromism-vertex', 
+    'goniochromism-fragment', 
     'sky-vertex',
     'sky-fragment'
 ]);
@@ -37,16 +39,20 @@ function InitMaterials()
                                        hemiLight.color.b * hemiLight.intensity);
     
     // Init materials definitions
-    InitChair();
+    InitMetal();
+    InitGoniochromism();
     InitSkyBox();
 
     // Add material definitions to the materialVector
-    materialVector.push(chairMaterial);     // chair
+    materialVector.push(goniochromismMaterial);     // iridescence
+    materialVector.push(metalMaterial);     // metal
     materialVector.push(skyMaterial);       // Sky map
 
     // Load glsl shaders from file
-    LoadGlsl('../../shaders/chair/fragment.glsl');
-    LoadGlsl('../../shaders/chair/vertex.glsl');
+    LoadGlsl('../../shaders/goniochromism/fragment.glsl');
+    LoadGlsl('../../shaders/goniochromism/vertex.glsl');
+    LoadGlsl('../../shaders/metal/fragment.glsl');
+    LoadGlsl('../../shaders/metal/vertex.glsl');
     LoadGlsl('../../shaders/skybox/vertex.glsl');
     LoadGlsl('../../shaders/skybox/fragment.glsl');
 }
