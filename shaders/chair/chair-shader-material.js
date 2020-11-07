@@ -1,9 +1,9 @@
 /*
 * Coil shader material defition
 *
-* author = 'Marco Iuri, Edoardo Lenzi'
+* author = 'Edoardo Lenzi'
 * version = '1.0'
-* license = 'GPL-3.0'
+* license = 'WTFPL-2.0'
 */
 
 function InitCoil(){

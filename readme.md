@@ -24,8 +24,8 @@ python3 -m http.server
 ---
 ## Credits
 
-See also [A Practical Extension to Microfacet Theory for the Modeling of Varying Iridescence](https://blogs.unity3d.com/2017/05/09/a-practical-extension-to-microfacet-theory-for-the-modeling-of-varying-iridescence/)
-
+* See also [A Practical Extension to Microfacet Theory for the Modeling of Varying Iridescence](https://blogs.unity3d.com/2017/05/09/a-practical-extension-to-microfacet-theory-for-the-modeling-of-varying-iridescence/)
+* [Chair](https://www.turbosquid.com/3d-models/3d-banquette---v-ray-model-1530280)
 
 
 ---
