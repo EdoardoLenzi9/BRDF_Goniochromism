@@ -41,7 +41,8 @@ function InitMaterials()
     InitSkyBox();
 
     // Add material definitions to the materialVector
-    materialVector.push(skyMaterial);   // Sky map
+    materialVector.push(chairMaterial);     // chair
+    materialVector.push(skyMaterial);       // Sky map
 
     // Load glsl shaders from file
     LoadGlsl('../../shaders/chair/fragment.glsl');

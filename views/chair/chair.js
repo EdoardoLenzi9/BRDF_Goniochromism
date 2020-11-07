@@ -21,6 +21,7 @@ var materialVector = new Array();
 // Skybox
 var skyMesh;
 var skyMaterial;
+var chairMaterial;
 
 
 /*
@@ -33,25 +34,21 @@ function Init() {
 	InitScene();
 	InitMaterials();
 	InitCamera();
-	camera.position.set( 150, 0, 150 );
-
+	
 	InitRenderer();
 	LoadMesh();
-
-	sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 16, 8), new THREE.MeshBasicMaterial({color: "red", wireframe: true}));
-	group.add(sphere)
-
+	
 	// init scene and camera pose
+	camera.position.set( 150, 0, 150 );
 	scene.add( group );
 		
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
-
-	// skyMesh = new THREE.Mesh(new THREE.SphereBufferGeometry(500, 64, 64), skyMaterial);
-	skyMesh = new THREE.Mesh(new THREE.SphereBufferGeometry(500, 64, 64), new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true, opacity: 0.5}));
-	scene.add(skyMesh);
-
-	Animate();
+	BindEvent( document, 'loading-complete', function(){
+		skyMesh = new THREE.Mesh( new THREE.SphereBufferGeometry( 500, 64, 64 ), skyMaterial );
+		scene.add( skyMesh );
+		Animate();
+	})
 }
 
 

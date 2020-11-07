@@ -44,6 +44,7 @@ function ApplyTemplate( template, placeholders=[], tag = '#container' ){
 */
 function LoadGlsl( filePath ){
     Read( filePath, function( content ){
+        debugger
         var tag = content.split( '\n' )[ 0 ];
         tag = tag.replace( '\r', '' );
         tag = tag.substring( 2, tag.length );
