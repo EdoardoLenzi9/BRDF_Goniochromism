@@ -34,12 +34,15 @@ function Init() {
 	InitScene();
 	InitMaterials();
 	InitCamera();
-	
 	InitRenderer();
-	LoadMesh();
+	InitMesh();
 	
 	// init scene and camera pose
 	camera.position.set( 150, 0, 150 );
+	group.scale.set( 0.3, 0.3, 0.3 );
+	group.position.set( group.position.x, 
+						group.position.y - 50, 
+						group.position.z );
 	scene.add( group );
 		
 	// general events
@@ -55,10 +58,11 @@ function Init() {
 /*
 * Given a component definition loads the component and add it to the scene
 */ 
-function LoadMesh( ) {
+function InitMesh( ) {
 	var loader = new THREE.GLTFLoader();
 	loader.load( "../../assets/models/chair.glb", function( gltf ) {
-		var gltfMesh = gltf.scene;
+		var gltfMesh = gltf.scene.children[2];
+		gltfMesh.material = chairMaterial;
 		group.add(gltfMesh);
 	});
 }
