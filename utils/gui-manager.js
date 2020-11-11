@@ -17,6 +17,7 @@ var settings = {
     goniochromism: false,
     roughness: 0,
     metalness: 0,
+    config: "0"
 };
 
 
@@ -67,6 +68,10 @@ gui.add(settings, 'envMap')
 
 gui.add(settings, 'goniochromism')
    .listen().onChange(updatePBR); 
+
+
+gui.add(settings, 'config', [0, 1, 2])
+    .listen().onChange(updatePBR);
 
 
 gui.add(settings, 'roughness')
