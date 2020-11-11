@@ -38,11 +38,6 @@ function InitMaterials()
                                        hemiLight.color.g * hemiLight.intensity, 
                                        hemiLight.color.b * hemiLight.intensity);
     
-    // Init materials definitions
-    InitMetal();
-    InitGoniochromism();
-    InitSkyBox();
-
 
     // Load glsl shaders from file
     LoadGlsl('../../shaders/goniochromism/fragment.glsl');

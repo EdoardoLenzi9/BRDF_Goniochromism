@@ -5,40 +5,34 @@
 var gui = new dat.GUI();
 
 var settings = {
-    metal: true,
+    lockView: false,
     goniochromism: false,
     roughness: 0,
     metalness: 0,
-    lockView: false
 };
 
-var lockView = gui.add(settings, 'lockView').listen().onChange(function (value) {
+var lockView = gui.add(settings, 'lockView')
+                  .listen().onChange(function (value) {
     controls.enabled = ! value;
 })
-
-var shaders = gui.addFolder("Shaders");
   
-var roughness = gui.add(settings, 'roughness').min(0).max(1).step(0.01).listen().onChange(function (value) {
+
+var roughness = gui.add(settings, 'roughness')
+                   .min(0).max(1).step(0.01)
+                   .listen().onChange(function (value) {
     InitMetal(value)
     group.children[0].material = metalMaterial
 })
 
-var metalness = gui.add(settings, 'metalness').min(0).max(1).step(0.01).listen().onChange(function (value) {
+
+var metalness = gui.add(settings, 'metalness')
+                   .min(0).max(1).step(0.01)
+                   .listen().onChange(function (value) {
 })
 
-shaders.add(settings, 'metal').listen().onChange(function (value) {
-    if(value){
-        settings.goniochromism = false
-        settings.metal = true
-        group.children[0].material = metalMaterial
-    } else{
-        settings.goniochromism = true
-        settings.metal = false
-        group.children[0].material = goniochromismMaterial
-    }
-}); 
-  
-shaders.add(settings, 'goniochromism').listen().onChange(function (value) {
+ 
+gui.add(settings, 'goniochromism')
+       .listen().onChange(function (value) {
     if(value){
         settings.goniochromism = true
         settings.metal = false

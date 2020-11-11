@@ -51,6 +51,11 @@ function Init() {
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
 	BindEvent( document, 'loading-complete', function(){
+		// Init materials definitions
+		InitMetal();
+		InitGoniochromism();
+		InitSkyBox();
+		
 		InitMesh();
 		Animate();
 	})
