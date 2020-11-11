@@ -7,11 +7,24 @@ var gui = new dat.GUI();
 var settings = {
     metal: true,
     goniochromism: false,
+    roughness: 0,
+    metalness: 0,
+    lockView: false
 };
 
+var lockView = gui.add(settings, 'lockView').listen().onChange(function (value) {
+    controls.enabled = ! value;
+})
 
-var shaders = gui.addFolder("Shaders");  
+var shaders = gui.addFolder("Shaders");
+  
+var roughness = gui.add(settings, 'roughness').min(0).max(1).step(0.01).listen().onChange(function (value) {
+    InitMetal(value)
+    group.children[0].material = metalMaterial
+})
 
+var metalness = gui.add(settings, 'metalness').min(0).max(1).step(0.01).listen().onChange(function (value) {
+})
 
 shaders.add(settings, 'metal').listen().onChange(function (value) {
     if(value){

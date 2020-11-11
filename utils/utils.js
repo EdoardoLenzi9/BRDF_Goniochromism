@@ -47,14 +47,8 @@ function LoadGlsl( filePath ){
         var tag = content.split( '\n' )[ 0 ];
         tag = tag.replace( '\r', '' );
         tag = tag.substring( 2, tag.length );
-        materialVector.forEach( function( element ){
-            if( element.vertexShader == tag ){
-                element.vertexShader = content;
-            }
-            if( element.fragmentShader == tag ){
-                element.fragmentShader = content;
-            }
-        });
+        glsl[tag] = content 
+
         todo.delete( tag );
         if( todo.size == 0 ){
             document.dispatchEvent( new CustomEvent( 'loading-complete', { } ));

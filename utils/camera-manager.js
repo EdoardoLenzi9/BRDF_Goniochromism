@@ -20,13 +20,12 @@ function InitCamera(){
 * Init Camera Control
 */
 function InitControl(minDistance = 100, maxDistance=500){
-
+	//controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls = new THREE.OrbitControls( camera );
 	controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
 	controls.dampingFactor = 0.25;
 	controls.screenSpacePanning = false;
 	controls.minDistance = minDistance;
 	controls.maxDistance = maxDistance;
-	controls.maxPolarAngle = Math.PI / 2;
-	
+	controls.maxPolarAngle = Math.PI / 2;	
 }

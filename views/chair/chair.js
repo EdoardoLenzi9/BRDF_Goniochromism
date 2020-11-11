@@ -9,6 +9,8 @@
 
 // Global variables and constants
 var camera, scene, renderer, controls, stats;
+var glsl = {}
+var lockView = true;
 var clock = new THREE.Clock();
 var group = new THREE.Group();
 
@@ -17,9 +19,7 @@ var group = new THREE.Group();
 var hemiLight, dirLight;
 
 
-// Materials
-var materialVector = new Array();
-
+// Materials and meshes
 
 // Skybox
 var skyMesh;
@@ -36,10 +36,9 @@ function Init() {
 	// loads arc-reactor-controls view
 	InitStat();
 	InitScene();
-	InitMaterials();
-	InitCamera();
 	InitRenderer();
-	InitMesh();
+	InitCamera();
+	InitMaterials();
 	
 	// init scene and camera pose
 	camera.position.set( 150, 0, 150 );
@@ -52,8 +51,7 @@ function Init() {
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
 	BindEvent( document, 'loading-complete', function(){
-		skyMesh = new THREE.Mesh( new THREE.SphereBufferGeometry( 500, 64, 64 ), skyMaterial );
-		scene.add( skyMesh );
+		InitMesh();
 		Animate();
 	})
 }
@@ -63,6 +61,8 @@ function Init() {
 * Given a component definition loads the component and add it to the scene
 */ 
 function InitMesh( ) {
+	skyMesh = new THREE.Mesh( new THREE.SphereBufferGeometry( 500, 64, 64 ), skyMaterial );
+	scene.add( skyMesh );
 	var loader = new THREE.GLTFLoader();
 	loader.load( "../../assets/models/chair.glb", function( gltf ) {
 		var gltfMesh = gltf.scene.children[2];
@@ -108,25 +108,6 @@ function InitScene(){
 	dirLight = CreateDirLight();
     scene.add( hemiLight );  
 	scene.add( dirLight );  
-}
-
-
-/*
-* Skybox init
-*/
-function InitSkyBox()
-{
-	skyMaterial = new THREE.ShaderMaterial(
-		{
-			vertexShader: 'sky-vertex',
-			fragmentShader: 'sky-fragment',
-			uniforms: {
-				"skyMap": {type: "t", value: environmentMaps[0]},
-				"diffOnly": {type: "f", value: 0.0}
-			},
-			side: THREE.BackSide
-		}
-	)
 }
 
 

@@ -43,10 +43,6 @@ function InitMaterials()
     InitGoniochromism();
     InitSkyBox();
 
-    // Add material definitions to the materialVector
-    materialVector.push(goniochromismMaterial);     // iridescence
-    materialVector.push(metalMaterial);     // metal
-    materialVector.push(skyMaterial);       // Sky map
 
     // Load glsl shaders from file
     LoadGlsl('../../shaders/goniochromism/fragment.glsl');

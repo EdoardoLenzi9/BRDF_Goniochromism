@@ -1,0 +1,6 @@
+PBR = L_o(v) = \int_\Omega L_i\ f(l,v)\ (n \cdot v)\ d\omega_o
+L_o(v) = \int_\Omega f(l,v)\otimes L_i(l)\ (n \cdot l)\ d\omega_i
+L_o(v) = \pi\ f(l_c,v)\otimes c_{light} (n \cdot l_c)
+f(l,v) = f_{specular}(l,v) + f_{diffuse}(l,v)
+f_{lambert}(l,v) =  \frac{c_{diff}}{\pi}
+L_o(v) = \pi\ \left(\frac{c_{diff}}{\pi}\right)\otimes c_{light}\ (n \cdot l_c)
