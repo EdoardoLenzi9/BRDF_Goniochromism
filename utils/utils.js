@@ -27,19 +27,6 @@ function Read( filePath, callback ){
 
 
 /*
-* Inject a view in the current page
-*/
-function ApplyTemplate( template, placeholders=[], tag = '#container' ){
-	Read( template, function( content ){
-        placeholders.forEach(function( placeholder ){
-            content = content.replace( placeholder[ 0 ], placeholder[ 1 ] );
-        });
-		$( tag ).html( content );	
-	})
-}
-
-
-/*
 * Load shader definition from a glsl file
 */
 function LoadGlsl( filePath ){

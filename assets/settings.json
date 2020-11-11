@@ -1,0 +1,13 @@
+{
+    "baseColor": "#5bc81f",
+    "lockView": true,    
+    "dirLightColor": "#305ae1",
+    "dirLight": 1,
+    "hemiLightColor": "#e89d9d",
+    "hemiLight": 0.02,
+    "envMap": true,
+    "goniochromism": true,
+    "roughness": 0.55,
+    "metalness": 0,
+    "config": "2"
+}

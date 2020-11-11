@@ -1,5 +1,5 @@
 /*
-* Arc-reactor view script
+* Chair view script
 *
 * author = 'Edoardo Lenzi'
 * version = '1.0'
@@ -8,7 +8,7 @@
 
 
 // Global variables and constants
-var camera, scene, renderer, controls, stats;
+var camera, scene, renderer, controls, stats, settings;
 var glsl = {}
 var lockView = true;
 var clock = new THREE.Clock();
@@ -32,31 +32,29 @@ var goniochromismMaterial;
 * Init function
 */ 
 function Init() {
-
-	// loads arc-reactor-controls view
-	InitStat();
-	InitScene();
-	InitRenderer();
-	InitCamera();
 	InitMaterials();
 	
-	// init scene and camera pose
-	camera.position.set( 150, 0, 150 );
-	group.scale.set( 0.3, 0.3, 0.3 );
-	group.position.set( group.position.x, 
-						group.position.y - 50, 
-						group.position.z );
-	scene.add( group );
+
 		
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
 	BindEvent( document, 'loading-complete', function(){
 		// Init materials definitions
+		initGUI();
+		InitStat();
+		InitScene();
+		InitRenderer();
+		InitCamera();
 		InitPBR();
-		InitGoniochromism();
 		InitSkyBox();
-
 		InitMesh();
+		// init scene and camera pose
+		camera.position.set( 150, 0, 150 );
+		group.scale.set( 0.3, 0.3, 0.3 );
+		group.position.set( group.position.x, 
+							group.position.y - 50, 
+							group.position.z );
+		scene.add( group );
 		Animate();
 	})
 }
@@ -94,7 +92,10 @@ function Animate() {
 * Renderer init
 */
 function InitRenderer(){
-	renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
+	renderer = new THREE.WebGLRenderer( { alpha: true, 
+										  antialias: true,
+										  preserveDrawingBuffer: true
+										} );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.gammaOutput = true;

@@ -16,8 +16,6 @@ var environmentMaps = new Array();
 var todo = new Set([
     'pbr-vertex', 
     'pbr-fragment',
-    'goniochromism-vertex', 
-    'goniochromism-fragment', 
     'sky-vertex',
     'sky-fragment'
 ]);
@@ -27,12 +25,13 @@ var envLightColor = new THREE.Vector3();
 
 function InitMaterials()
 {
+
+    LoadSettings()
+
     // Environment map loading
     LoadEnvMaps();
  
     // Load glsl shaders from file
-    LoadGlsl('../../shaders/goniochromism/fragment.glsl');
-    LoadGlsl('../../shaders/goniochromism/vertex.glsl');
     LoadGlsl('../../shaders/pbr/fragment.glsl');
     LoadGlsl('../../shaders/pbr/vertex.glsl');
     LoadGlsl('../../shaders/skybox/vertex.glsl');
