@@ -14,8 +14,8 @@ var chair;
 var environmentMaps = new Array();
 
 var todo = new Set([
-    'metal-vertex', 
-    'metal-fragment',
+    'pbr-vertex', 
+    'pbr-fragment',
     'goniochromism-vertex', 
     'goniochromism-fragment', 
     'sky-vertex',
@@ -29,21 +29,12 @@ function InitMaterials()
 {
     // Environment map loading
     LoadEnvMaps();
-
-    // Light setup
-    pointLightColor = new THREE.Vector3( dirLight.color.r * dirLight.intensity, 
-                                         dirLight.color.g * dirLight.intensity, 
-                                         dirLight.color.b * dirLight.intensity);
-    envLightColor = new THREE.Vector3( hemiLight.color.r * hemiLight.intensity, 
-                                       hemiLight.color.g * hemiLight.intensity, 
-                                       hemiLight.color.b * hemiLight.intensity);
-    
-
+ 
     // Load glsl shaders from file
     LoadGlsl('../../shaders/goniochromism/fragment.glsl');
     LoadGlsl('../../shaders/goniochromism/vertex.glsl');
-    LoadGlsl('../../shaders/metal/fragment.glsl');
-    LoadGlsl('../../shaders/metal/vertex.glsl');
+    LoadGlsl('../../shaders/pbr/fragment.glsl');
+    LoadGlsl('../../shaders/pbr/vertex.glsl');
     LoadGlsl('../../shaders/skybox/vertex.glsl');
     LoadGlsl('../../shaders/skybox/fragment.glsl');
 }

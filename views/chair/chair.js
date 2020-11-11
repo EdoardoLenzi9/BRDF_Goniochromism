@@ -24,7 +24,7 @@ var hemiLight, dirLight;
 // Skybox
 var skyMesh;
 var skyMaterial;
-var metalMaterial;
+var pbrMaterial;
 var goniochromismMaterial;
 
 
@@ -52,10 +52,10 @@ function Init() {
 	BindEvent( window, 'resize', OnWindowResize );
 	BindEvent( document, 'loading-complete', function(){
 		// Init materials definitions
-		InitMetal();
+		InitPBR();
 		InitGoniochromism();
 		InitSkyBox();
-		
+
 		InitMesh();
 		Animate();
 	})
@@ -67,11 +67,13 @@ function Init() {
 */ 
 function InitMesh( ) {
 	skyMesh = new THREE.Mesh( new THREE.SphereBufferGeometry( 500, 64, 64 ), skyMaterial );
-	scene.add( skyMesh );
+	if(settings.envMap){
+		scene.add( skyMesh );
+	}
 	var loader = new THREE.GLTFLoader();
 	loader.load( "../../assets/models/chair.glb", function( gltf ) {
 		var gltfMesh = gltf.scene.children[2];
-		gltfMesh.material = metalMaterial;
+		gltfMesh.material = pbrMaterial;
 		group.add(gltfMesh);
 	});
 }
@@ -111,8 +113,12 @@ function InitScene(){
 	scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 	hemiLight = CreateHemiLight();
 	dirLight = CreateDirLight();
-    scene.add( hemiLight );  
-	scene.add( dirLight );  
+	if(settings.hemiLight){
+		scene.add( hemiLight );  
+	}
+	if(settings.dirLight){
+		scene.add( dirLight );  
+	}
 }
 
 
