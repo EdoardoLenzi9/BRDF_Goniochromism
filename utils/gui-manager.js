@@ -6,6 +6,9 @@
 var gui = new dat.GUI();
 
 
+/*
+* Load initial config from a .json file
+*/ 
 var LoadSettings = function( ){
 	Read( "../../assets/settings.json", function( content ){
         settings = JSON.parse(content);
@@ -13,11 +16,18 @@ var LoadSettings = function( ){
 }
 
 
+/*
+* Updates PBRMaterial at runtime
+*/ 
 var updatePBR = function(_){
     InitPBR();
     group.children[0].material = pbrMaterial;
 }
 
+
+/*
+* Bind widgets to UI
+*/ 
 var initGUI = function(){
     gui.addColor(settings, 'baseColor')
     .listen().onChange( updatePBR );

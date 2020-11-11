@@ -8,9 +8,9 @@
 
 
 // Global variables and constants
-var camera, scene, renderer, controls, stats, settings;
+var camera, scene, renderer;
+var controls, stats, settings;
 var glsl = {}
-var lockView = true;
 var clock = new THREE.Clock();
 var group = new THREE.Group();
 
@@ -19,13 +19,13 @@ var group = new THREE.Group();
 var hemiLight, dirLight;
 
 
-// Materials and meshes
-
 // Skybox
 var skyMesh;
+
+
+// Materials
 var skyMaterial;
 var pbrMaterial;
-var goniochromismMaterial;
 
 
 /*
@@ -34,12 +34,9 @@ var goniochromismMaterial;
 function Init() {
 	InitMaterials();
 	
-
-		
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
 	BindEvent( document, 'loading-complete', function(){
-		// Init materials definitions
 		initGUI();
 		InitStat();
 		InitScene();
@@ -48,6 +45,7 @@ function Init() {
 		InitPBR();
 		InitSkyBox();
 		InitMesh();
+
 		// init scene and camera pose
 		camera.position.set( 150, 0, 150 );
 		group.scale.set( 0.3, 0.3, 0.3 );
@@ -61,7 +59,7 @@ function Init() {
 
 
 /*
-* Given a component definition loads the component and add it to the scene
+* Init EnvMap and Chair Mesh
 */ 
 function InitMesh( ) {
 	skyMesh = new THREE.Mesh( new THREE.SphereBufferGeometry( 500, 64, 64 ), skyMaterial );

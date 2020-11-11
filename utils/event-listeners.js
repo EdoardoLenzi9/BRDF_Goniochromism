@@ -34,7 +34,8 @@ function UnbindEvent(element, eventName, eventHandler) {
 
 
 /*
-* Define an event listener on the window resize event (in order to adjust the aspect ratio)
+* Define an event listener on the window resize event 
+* (in order to adjust the aspect ratio)
 */
 function OnWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;

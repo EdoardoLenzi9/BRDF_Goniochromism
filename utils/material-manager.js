@@ -7,12 +7,13 @@
 */
 
 
-//Creates materials
+// Creates materials
 var chair;
 
 // Textures
 var environmentMaps = new Array();
 
+// Shaders in loading queue
 var todo = new Set([
     'pbr-vertex', 
     'pbr-fragment',
@@ -20,12 +21,10 @@ var todo = new Set([
     'sky-fragment'
 ]);
 
-var pointLightColor = new THREE.Vector3();
-var envLightColor = new THREE.Vector3();
 
 function InitMaterials()
 {
-
+    // Load GUI settings
     LoadSettings()
 
     // Environment map loading

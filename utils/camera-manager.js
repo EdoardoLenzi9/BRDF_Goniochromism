@@ -11,7 +11,10 @@
 * Init camera and call camera control initialization
 */
 function InitCamera(){
-	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera = new THREE.PerspectiveCamera( 75, 
+										  window.innerWidth / window.innerHeight, 
+										  1, 
+										  1000 );
 	InitControl();
 }
 

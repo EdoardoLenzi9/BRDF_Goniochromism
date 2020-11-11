@@ -83,3 +83,39 @@ function CloseFullscreen() {
     $( '#compress' ).removeClass( 'visible' );
     $( '#compress' ).addClass( 'invisible' );
 }
+
+
+/*
+* Take snapshot
+* https://stackoverflow.com/questions/26193702/three-js-how-can-i-make-a-2d-snapshot-of-a-scene-as-a-jpg-image
+*/
+function saveAsImage(frameId) {
+    var imgData;
+    var strDownloadMime = "image/octet-stream";
+    try {
+        var strMime = "image/jpeg";
+        iframe = document.getElementById(frameId).contentWindow;
+        imgData = iframe.renderer.domElement.toDataURL(strMime);
+
+        saveFile(imgData.replace(strMime, strDownloadMime), "screenshot.jpg");
+
+    } catch (e) {
+        console.log(e);
+        return;
+    }
+
+}
+
+
+var saveFile = function (strData, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+        document.body.appendChild(link); //Firefox requires the link to be in the body
+        link.download = filename;
+        link.href = strData;
+        link.click();
+        document.body.removeChild(link); //remove the link when done
+    } else {
+        location.replace(uri);
+    }
+}
