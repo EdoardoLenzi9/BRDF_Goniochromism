@@ -24,6 +24,6 @@ class CliTest(unittest.TestCase):
         
 
     def test(self):
-        command = '-h'.split()
+        command = '--diff assets/images/test0.jpg assets/images/test1.jpg'.split()
         args = Parser().parse_args(command)    
         CliHandler(args)

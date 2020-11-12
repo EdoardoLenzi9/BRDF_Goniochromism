@@ -1,6 +1,6 @@
 {
     "baseColor": "#5bc81f",
-    "lockView": true,    
+    "lockView": false,    
     "dirLightColor": "#305ae1",
     "dirLight": 1,
     "hemiLightColor": "#e89d9d",

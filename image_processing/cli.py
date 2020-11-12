@@ -38,7 +38,7 @@ class Parser(object):
             epilog = 'Source: https://github.com/EdoardoLenzi9/BRDF_Goniochromism' )
 
 
-        self.parser.add_argument('--compare', dest='compare', metavar='N', type=str, nargs=2,
+        self.parser.add_argument('--diff', dest='diff', metavar='N', type=str, nargs=2,
                                 help='Compares 2 images')
 
 

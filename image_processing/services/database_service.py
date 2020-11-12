@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
-# coding: utf-8
-
-'''DB manager based on SQL Alchemy engine'''
+# -*- coding: utf-8 -*-
 
 __author__ = 'Edoardo Lenzi'
-__email__ = 'edoardolenzi9@gmail.com'
 __version__ = '1.0'
-__license__ = 'GPL-3.0'
-__copyright__ = 'Copyleft 2018, lenzi.edoardo'
+__license__ = '???'
+__copyright__ = '???'
 
 
 import json
@@ -27,6 +24,8 @@ LOGGER = logging.getLogger(__name__)
 
 
 class DatabaseService():
+    
+    '''DB manager based on SQL Alchemy engine'''
 
     '''Exposes some primitives for the DB access'''
 
