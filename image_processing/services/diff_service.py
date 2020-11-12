@@ -25,12 +25,18 @@ class DiffService(object):
         assert img1.size[0] == img2.size[0]
         assert img1.size[1] == img2.size[1]
 
+        diff = Image.new('RGB', img1.size, color = 'red')
+
         for x in range(img1.size[0]):
             for y in range(img1.size[1]):
                 if pix1[x, y] == pix2[x, y]:
                     pix1[x, y] = (0, 0, 0)
                     pix2[x, y] = (0, 0, 0) 
+                diff.putpixel((x, y), ( abs(pix1[x, y][0] - pix2[x, y][0]),
+                                        abs(pix1[x, y][1] - pix2[x, y][1]),
+                                        abs(pix1[x, y][2] - pix2[x, y][2]) ))
         file_name1 = os.path.basename(img_path1)
         file_name2 = os.path.basename(img_path2)
         img1.save(img_path1.replace(file_name1, "diff_" + file_name1))
         img2.save(img_path2.replace(file_name2, "diff_" + file_name2))
+        diff.save(img_path2.replace(file_name2, "diff.png"))
