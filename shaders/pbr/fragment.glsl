@@ -90,36 +90,6 @@ void fresnelConductor(in float ct1, in float n1, in float n2, in float k,
 	phi.x = atan( 2.0*n1*sqr(n2)*ct1 * (2.0*k*U - (1.0-sqr(k))*V), sqr(sqr(n2)*(1.0+sqr(k))*ct1) - sqr(n1)*(sqr(U)+sqr(V)) );
 }
 
-// ------------- //
-//      BRDF     //
-// ------------- //
-
-vec3 FSchlick(float lDoth) {
-    return (baseColor + (vec3(1.0)-baseColor)*pow(1.0 - lDoth, 5.0));
-}
-
-
-float DGGX(float nDoth, float alpha) {
-    float alpha2 = alpha*alpha;
-    float d = nDoth*nDoth*(alpha2-1.0)+1.0;
-    return (  alpha2 / (d*d));
-}
-
-
-float G1(float dotProduct, float k) {
-    return (1.0 / (dotProduct*(1.0-k) + k) );
-}
-
-
-float GSmith(float nDotv, float nDotl, float k) {
-        return G1(nDotl,k)*G1(nDotv,k);
-}
-
-
-vec3 InverseTransformDirection( in vec3 dir, in mat4 matrix ) {
-    return normalize( ( vec4( dir, 0.0 ) * matrix ).xyz );
-}
-
 
 vec3 Airy(vec3 N, vec3 L, vec3 V){
 	// Force eta_2 -> 1.0 when Dinc -> 0.0
@@ -177,6 +147,37 @@ vec3 Airy(vec3 N, vec3 L, vec3 V){
 }
 
 
+// ------------- //
+//      BRDF     //
+// ------------- //
+
+vec3 FSchlick(float lDoth) {
+    return (baseColor + (vec3(1.0)-baseColor)*pow(1.0 - lDoth, 5.0));
+}
+
+
+float DGGX(float nDoth, float alpha) {
+    float alpha2 = alpha*alpha;
+    float d = nDoth*nDoth*(alpha2-1.0)+1.0;
+    return (  alpha2 / (d*d));
+}
+
+
+float G1(float dotProduct, float k) {
+    return (1.0 / (dotProduct*(1.0-k) + k) );
+}
+
+
+float GSmith(float nDotv, float nDotl, float k) {
+        return G1(nDotl,k)*G1(nDotv,k);
+}
+
+
+vec3 InverseTransformDirection( in vec3 dir, in mat4 matrix ) {
+    return normalize( ( vec4( dir, 0.0 ) * matrix ).xyz );
+}
+
+
 void main()
 {
     vec4 pointLightViewPosition = viewMatrix * vec4(pointLightWorldPosition, 1.0);
@@ -210,7 +211,13 @@ void main()
         vec3 r = normalize(reflect(worldV, worldN));
         envUV.y = asin( clamp( r.y, - 1.0, 1.0 ) ) * RECIPROCAL_PI + 0.5;
         envUV.x = atan( r.z, r.x ) * RECIPROCAL_PI*0.5 + 0.5;
-        vec3 F = FSchlick(max(dot(n, v), EPS));
+        vec3 F;
+		if(applyAiry){
+        	//F = Airy(n, l, v);
+			F = FSchlick( max(dot(n, v), EPS));
+    	} else {
+        	F = FSchlick( max(dot(n, v), EPS));
+    	}
         vec3 refEnvColor = pow(texture2D(envMap, envUV).rgb, vec3(2.2)) * F;
         indirLightRadiance += refEnvColor;
     }
