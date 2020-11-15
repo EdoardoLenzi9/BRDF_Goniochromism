@@ -47,7 +47,7 @@ function LoadEnvMaps()
 {
     for( var i = 0; i <= 8; i++ )
     {
-        var filename = '../../assets/textures/envmap_mip' + String(i) + '.png';
+        var filename = '../../textures/envmap_mip' + String(i) + '.png';
         var thisTex = LoadTexture( filename );
         environmentMaps.push( thisTex );
     }

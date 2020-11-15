@@ -10,7 +10,7 @@ var gui = new dat.GUI();
 * Load initial config from a .json file
 */ 
 var LoadSettings = function( ){
-	Read( "../../assets/settings.json", function( content ){
+	Read( "../../settings.json", function( content ){
         settings = JSON.parse(content);
 	});
 }

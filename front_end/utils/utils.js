@@ -97,8 +97,7 @@ function saveAsImage(frameId) {
         iframe = document.getElementById(frameId).contentWindow;
         imgData = iframe.renderer.domElement.toDataURL(strMime);
 
-        saveFile(imgData.replace(strMime, strDownloadMime), "screenshot.jpg");
-
+        httpPostAsync('', [/*["Header", "header"]*/], [imgData], function(reply){alert(reply)})
     } catch (e) {
         console.log(e);
         return;

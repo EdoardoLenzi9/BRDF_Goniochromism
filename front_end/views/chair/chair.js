@@ -67,7 +67,7 @@ function InitMesh( ) {
 		scene.add( skyMesh );
 	}
 	var loader = new THREE.GLTFLoader();
-	loader.load( "../../assets/models/chair.glb", function( gltf ) {
+	loader.load( "../../models/chair.glb", function( gltf ) {
 		var gltfMesh = gltf.scene.children[2];
 		gltfMesh.material = pbrMaterial;
 		group.add(gltfMesh);
