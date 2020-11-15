@@ -9,5 +9,8 @@
     "goniochromism": true,
     "roughness": 0.55,
     "metalness": 0,
-    "config": "2"
+    "config": "2",
+    "x": 0,
+    "y": 0,
+    "z": 0
 }

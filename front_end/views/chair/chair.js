@@ -41,6 +41,9 @@ function Init() {
 		if(runs.length > 0){
 			if(! takeScreenShot){
 				settings = runs.pop();
+				group.rotation.set( settings.x, 
+									settings.y, 
+									settings.z);
 				updatePBR()
 				takeScreenShot = true
 			} 
@@ -58,6 +61,9 @@ function Init() {
 
 		// init scene and camera pose
 		camera.position.set( 150, 0, 150 );
+		group.rotation.set( settings.x, 
+							settings.y, 
+							settings.z);
 		group.scale.set( 0.3, 0.3, 0.3 );
 		group.position.set( group.position.x, 
 							group.position.y - 50, 

@@ -14,8 +14,8 @@ app.options('*', cors());
 
 
 /* Body parser */
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+app.use(bodyParser.json({ limit: "50mb" }))
 
 
 /* Middelwares and routing */
