@@ -13,6 +13,7 @@ var controls, stats, settings;
 var glsl = {}
 var clock = new THREE.Clock();
 var group = new THREE.Group();
+var takeScreenShot = false;
 
 
 // Lights
@@ -36,6 +37,15 @@ function Init() {
 	
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
+	BindEvent( document, 'runs', function(){
+		if(runs.length > 0){
+			if(! takeScreenShot){
+				settings = runs.pop();
+				updatePBR()
+				takeScreenShot = true
+			} 
+		}
+	});
 	BindEvent( document, 'loading-complete', function(){
 		initGUI();
 		InitStat();
@@ -79,6 +89,13 @@ function InitMesh( ) {
 * Loop function
 */
 function Animate() {
+	if(takeScreenShot){
+		var strMime = "image/jpeg";
+        imgData = renderer.domElement.toDataURL(strMime);
+		httpPostAsync('', [], [settings.name, imgData], function(reply){console.log(reply)});
+		takeScreenShot = false;
+		document.dispatchEvent(new CustomEvent( 'runs', {} ))
+	}
 	stats.update();
 	controls.update();
 	requestAnimationFrame( Animate );

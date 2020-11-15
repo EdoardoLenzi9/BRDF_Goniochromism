@@ -6,18 +6,13 @@ var router = express.Router();
 
 
 /* End Points */
-/*
-router.get("/", function(req, res) {
-    url = 'https://miro.medium.com/max/4820/1*4jkVSbW-OL84QVCvxYtIag.png'
-    saveImageToDisk(url, 'a.png')
-    res.send("ciao")
-});
-*/
+
 
 router.post("/", function(req, res) {
-    var image = req.body[0]
+    var filename = req.body[0]
+    var image = req.body[1]
     var data = image.replace(/^data:image\/\w+;base64,/, '');
-    fs.writeFile('assets/images/a.jpg', data, {encoding: 'base64'}, function(err){
+    fs.writeFile('assets/images/screenshots/'+filename, data, {encoding: 'base64'}, function(err){
         //res.send(err)
     });
     res.send("image_saved")
@@ -45,8 +40,6 @@ function saveImageToDisk(url, localPath) {
         response.pipe(file);
     });
 }
-
-
 
 
 module.exports = {

@@ -1,0 +1,58 @@
+[
+    {
+        "name": "run1.jpg",
+        "baseColor": "#ffffff",
+        "lockView": false,    
+        "dirLightColor": "#305ae1",
+        "dirLight": 1,
+        "hemiLightColor": "#e89d9d",
+        "hemiLight": 0.02,
+        "envMap": true,
+        "goniochromism": true,
+        "roughness": 0.55,
+        "metalness": 0,
+        "config": "2"
+    },
+    {
+        "name": "run2.jpg",
+        "baseColor": "#000000",
+        "lockView": false,    
+        "dirLightColor": "#305ae1",
+        "dirLight": 1,
+        "hemiLightColor": "#e89d9d",
+        "hemiLight": 0.02,
+        "envMap": true,
+        "goniochromism": true,
+        "roughness": 0.55,
+        "metalness": 0,
+        "config": "2"
+    },
+    {
+        "name": "run3.jpg",
+        "baseColor": "#fff000",
+        "lockView": false,    
+        "dirLightColor": "#000",
+        "dirLight": 1,
+        "hemiLightColor": "#e89d9d",
+        "hemiLight": 0.02,
+        "envMap": true,
+        "goniochromism": true,
+        "roughness": 0.55,
+        "metalness": 0,
+        "config": "2"
+    },
+    {
+        "name": "settings.jpg",
+        "baseColor": "#000000",
+        "lockView": false,    
+        "dirLightColor": "#000000",
+        "dirLight": 1,
+        "hemiLightColor": "#e89d9d",
+        "hemiLight": 0.02,
+        "envMap": true,
+        "goniochromism": true,
+        "roughness": 0.55,
+        "metalness": 0,
+        "config": "2"
+    }
+]

@@ -25,7 +25,10 @@
 			<div id="view-container">
 				<iframe id="chair-view" src="views/chair/chair.html"></iframe>
 				<button onclick="OpenFullscreen('chair-view')">FULL SCREEN</button>
-				<button onclick="saveAsImage('chair-view')">SCREENSHOT</button>
+				<button onclick="downloadImage('chair-view')">SCREENSHOT</button>
+				<button onclick="saveAsImage('chair-view')">SAVE</button>
+				<input id="settings" type="text" value="00_run.json" placeholder="00_run.json">
+				<button onclick="loadRun($('#settings')[0].value, 'chair-view')">LOAD SETTINGS</button>
 			</div>
 		</article>
 		<!--Footer-->

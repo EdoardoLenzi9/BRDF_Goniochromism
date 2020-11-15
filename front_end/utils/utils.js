@@ -89,15 +89,29 @@ function CloseFullscreen() {
 * Take snapshot
 * https://stackoverflow.com/questions/26193702/three-js-how-can-i-make-a-2d-snapshot-of-a-scene-as-a-jpg-image
 */
-function saveAsImage(frameId) {
+function downloadImage(frameId) {
     var imgData;
     var strDownloadMime = "image/octet-stream";
     try {
         var strMime = "image/jpeg";
         iframe = document.getElementById(frameId).contentWindow;
         imgData = iframe.renderer.domElement.toDataURL(strMime);
+        saveFile(imgData.replace(strMime, strDownloadMime), "screenshot.jpg")
+    } catch (e) {
+        console.log(e);
+        return;
+    }
 
-        httpPostAsync('', [/*["Header", "header"]*/], [imgData], function(reply){alert(reply)})
+}
+
+
+function saveAsImage(frameId) {
+    var imgData;
+    try {
+        var strMime = "image/jpeg";
+        iframe = document.getElementById(frameId).contentWindow;
+        imgData = iframe.renderer.domElement.toDataURL(strMime);
+        httpPostAsync('', [/*["Header", "header"]*/], ["screenshot.jpg", imgData], function(reply){console.log(reply)})
     } catch (e) {
         console.log(e);
         return;
@@ -117,4 +131,14 @@ var saveFile = function (strData, filename) {
     } else {
         location.replace(uri);
     }
+}
+
+
+function loadRun(run_name, frame_id){
+    Read( "../../runs/" + run_name, function( content ){
+        runs = JSON.parse(content);
+        document.getElementById(frame_id).contentWindow.runs = runs
+        document.getElementById(frame_id).contentDocument
+                .dispatchEvent( new CustomEvent( 'runs', {} ));    
+	});
 }
