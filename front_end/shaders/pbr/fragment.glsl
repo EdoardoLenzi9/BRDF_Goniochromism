@@ -213,15 +213,12 @@ void main()
         vec3 I = Airy(n, l, v);
 		float G = smithG_GGX(NdotL, NdotV, alpha);
 		float D = GGX(NdotH, alpha);
-		// D*G*I / (4*NdotL*NdotV);
-		directLightRadiance = pointLightColor * NdotL / 4.0 * 
-                              ( I * G * D );
+		directLightRadiance = pointLightColor * NdotL * ( I * G * D ) / 4.0;
     } else {
         vec3 F = FSchlick(LdotH);
 		float G = GSmith(NdotV, NdotL, alpha2);
 		float D = DGGX(NdotH, alpha2);
-		directLightRadiance = pointLightColor * NdotL / 4.0 * 
-                              ( F * G * D );
+		directLightRadiance = pointLightColor * NdotL * ( F * G * D ) / 4.0;
     }
 
     //Indirect light calculation

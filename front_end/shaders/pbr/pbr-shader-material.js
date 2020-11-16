@@ -7,7 +7,7 @@
 */
 
 
-function InitPBR(){   
+function InitPBR(){ 
     hemiLightColor = new THREE.Color( settings.hemiLightColor ).multiplyScalar( settings.hemiLight )
     dirLightColor = new THREE.Color( settings.hemiLightColor ).multiplyScalar( settings.dirLight )
     pbrMaterial = new THREE.ShaderMaterial(
@@ -20,12 +20,12 @@ function InitPBR(){
                 'pointLightWorldPosition': { type: 'v3', value: dirLight.position },
                 'pointLightColor': { type: 'v3', value: dirLightColor },
                 'envLightColor': { type: 'v3', value: hemiLightColor },
-                'envMap': { type:'t', value: environmentMaps[ Math.floor(settings.roughness * 8) ] },
-                'dinc': { type: 'f', value: settings.dinc[Number(settings.config)]},
-                'eta2': { type: 'f', value: settings.eta2[Number(settings.config)]},
-                'eta3': { type: 'f', value: settings.eta3[Number(settings.config)]},
-                'kappa3': { type: 'f', value: settings.kappa3[Number(settings.config)]},
-                'alpha': { type: 'f', value: settings.roughness }
+                'envMap': { type:'t', value: environmentMaps[ Math.floor(settings.alpha * 8) ] },
+                'dinc': { type: 'f', value: settings.dinc},
+                'eta2': { type: 'f', value: settings.eta2},
+                'eta3': { type: 'f', value: settings.eta3},
+                'kappa3': { type: 'f', value: settings.kappa3},
+                'alpha': { type: 'f', value: settings.alpha }
             },
             vertexShader:   glsl['pbr-vertex'],
             fragmentShader: glsl['pbr-fragment']

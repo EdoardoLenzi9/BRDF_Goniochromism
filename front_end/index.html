@@ -26,9 +26,9 @@
 				<iframe id="chair-view" src="views/chair/chair.html"></iframe>
 				<button onclick="OpenFullscreen('chair-view')">FULL SCREEN</button>
 				<button onclick="downloadImage('chair-view')">SCREENSHOT</button>
-				<button onclick="saveAsImage('chair-view')">SAVE</button>
-				<input id="settings" type="text" value="00_run.json" placeholder="00_run.json">
-				<button onclick="loadRun($('#settings')[0].value, 'chair-view')">LOAD SETTINGS</button>
+				<button onclick="saveAll('chair-view')">SCREENSHOT-ALL</button>
+				<input id="settings" type="text" value="default_settings.json" placeholder="default_settings.json">
+				<button onclick="loadConfigs($('#settings')[0].value, 'chair-view')">LOAD CONFIGS</button>
 			</div>
 		</article>
 		<!--Footer-->

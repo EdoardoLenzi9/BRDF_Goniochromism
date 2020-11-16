@@ -8,8 +8,8 @@
 
 
 // Global variables and constants
-var camera, scene, renderer;
-var controls, stats, settings;
+var camera, scene, renderer, controls;
+var stats, settings, configs, numConfigs;
 var glsl = {}
 var clock = new THREE.Clock();
 var group = new THREE.Group();

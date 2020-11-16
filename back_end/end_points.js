@@ -12,7 +12,7 @@ router.post("/", function(req, res) {
     var filename = req.body[0]
     var image = req.body[1]
     var data = image.replace(/^data:image\/\w+;base64,/, '');
-    fs.writeFile('assets/images/screenshots/'+filename, data, {encoding: 'base64'}, function(err){
+    fs.writeFile('assets/images/screenshots/'+filename+".jpg", data, {encoding: 'base64'}, function(err){
         //res.send(err)
     });
     res.send("image_saved")

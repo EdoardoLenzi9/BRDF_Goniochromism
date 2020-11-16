@@ -116,7 +116,14 @@ function saveAsImage(frameId) {
         console.log(e);
         return;
     }
+}
 
+
+function saveAll(frameId) {
+    cw = document.getElementById(frameId).contentWindow
+    cw.runs = [...cw.configs]
+    document.getElementById(frameId).contentDocument
+            .dispatchEvent( new CustomEvent( 'runs', {} ));    
 }
 
 
@@ -134,11 +141,13 @@ var saveFile = function (strData, filename) {
 }
 
 
-function loadRun(run_name, frame_id){
-    Read( "../../runs/" + run_name, function( content ){
-        runs = JSON.parse(content);
-        document.getElementById(frame_id).contentWindow.runs = runs
-        document.getElementById(frame_id).contentDocument
-                .dispatchEvent( new CustomEvent( 'runs', {} ));    
-	});
+function loadConfigs(config_name, frame_id){
+    Read( "../../settings/" + config_name, function( content ){
+        configs = JSON.parse(content);
+        cw = document.getElementById(frame_id).contentWindow
+        cw.configs = configs
+        cw.settings = configs[0]
+        cw.settings.config = 0
+        cw.updatePBR()
+    });
 }
