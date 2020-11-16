@@ -9,7 +9,7 @@
 git clone https://github.com/EdoardoLenzi9/BRDF_Goniochromism.git
 cd BRDF_Goniochromism
 npm install
-python3 -m http.server
+node index.js
 ```
 
 ---

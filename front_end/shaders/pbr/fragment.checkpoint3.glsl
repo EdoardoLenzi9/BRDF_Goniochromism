@@ -6,6 +6,7 @@ varying vec3 vNormal;
 varying vec3 vViewPosition;
 varying vec3 vWorldPosition;
 uniform vec3 baseColor;
+uniform float roughness;
 uniform float metalness;
 uniform vec3 pointLightWorldPosition;
 uniform vec3 pointLightColor;
@@ -17,13 +18,13 @@ uniform float Dinc;
 uniform float eta2;
 uniform float eta3;
 uniform float kappa3;
-uniform float alpha; // roughness
+uniform float alpha;
 
 const float PI = 3.14159265358979323846;
 
-// ------------------ //
-// Goniochromism BRDF //
-// ------------------ //
+// ------------- //
+// Goniochromism //
+// ------------- //
 
 const mat3 XYZ_TO_RGB = mat3(2.3706743, -0.5138850, 0.0052982, -0.9000405, 1.4253036, -0.0146949, -0.4706338, 0.0885814, 1.0093968);
 float sqr(float x) {return x * x;}
@@ -146,22 +147,6 @@ vec3 Airy(vec3 N, vec3 L, vec3 V){
 }
 
 
-// GGX distribution function
-float GGX(float NdotH, float a) {
-    float a2 = sqr(a);
-    return a2 / (PI * sqr( sqr(NdotH) * (a2 - 1.0) + 1.0 ) );
-}
-
-// Smith GGX geometric functions
-float smithG1_GGX(float NdotV, float a) {
-    float a2 = sqr(a);
-    return 2.0 / (1.0 + sqrt(1.0 + a2 * (1.0-sqr(NdotV)) / sqr(NdotV) ));
-}
-
-float smithG_GGX(float NdotL, float NdotV, float a) {
-    return smithG1_GGX(NdotL, a) * smithG1_GGX(NdotV, a);
-}
-
 // ------------- //
 //      BRDF     //
 // ------------- //
@@ -195,34 +180,26 @@ vec3 InverseTransformDirection( in vec3 dir, in mat4 matrix ) {
 
 void main()
 {
-    vec4 vPointLightPosition = viewMatrix * vec4(pointLightWorldPosition, 1.0);
+    vec4 pointLightViewPosition = viewMatrix * vec4(pointLightWorldPosition, 1.0);
 
     //Direct light calculation
-    vec3 l = normalize(vPointLightPosition.xyz - vViewPosition.xyz);
+    vec3 l = normalize(pointLightViewPosition.xyz - vViewPosition.xyz);
     vec3 v = normalize(-vViewPosition);
     vec3 h = normalize(l + v);
     vec3 n = normalize(vNormal);
-	float LdotH = max(dot(l, h), EPS);
-	float NdotL = max(dot(n, l), EPS);
-	float NdotH = max(dot(n, h), EPS);
-	float NdotV = max(dot(n, v), EPS);
-    float alpha2 = alpha*alpha;
-	vec3 directLightRadiance;
-
+    float sqRoughness = roughness*roughness;
+    vec3 Fresnel;
     if(applyAiry){
-        vec3 I = Airy(n, l, v);
-		float G = smithG_GGX(NdotL, NdotV, alpha);
-		float D = GGX(NdotH, alpha);
-		// D*G*I / (4*NdotL*NdotV);
-		directLightRadiance = pointLightColor * NdotL / 4.0 * 
-                              ( I * G * D );
+        Fresnel = Airy(n, l, v);
     } else {
-        vec3 F = FSchlick(LdotH);
-		float G = GSmith(NdotV, NdotL, alpha2);
-		float D = DGGX(NdotH, alpha2);
-		directLightRadiance = pointLightColor * NdotL / 4.0 * 
-                              ( F * G * D );
+        Fresnel = FSchlick( max(dot(l, h), EPS));
     }
+
+    vec3 directLightRadiance = pointLightColor * max(dot(n, l), EPS) / 4.0 * 
+                               ( Fresnel * 
+                                 GSmith(max(dot(n, v), EPS), max(dot(n, l), EPS), sqRoughness) * 
+                                 DGGX(max(dot(n, h), EPS), sqRoughness)
+                                );
 
     //Indirect light calculation
     vec3 indirLightRadiance = envLightColor * baseColor;

@@ -12,6 +12,7 @@ var gui = new dat.GUI();
 var LoadSettings = function( ){
 	Read( "../../settings.json", function( content ){
         settings = JSON.parse(content);
+        settings.roughness = settings.alpha[Number(settings.config)]
 	});
 }
 
@@ -73,7 +74,10 @@ var initGUI = function(){
 
 
     gui.add(settings, 'config', [0, 1, 2])
-        .listen().onChange(updatePBR);
+        .listen().onChange(function(){
+            settings.roughness = settings.alpha[Number(settings.config)]
+            updatePBR()
+        });
 
 
     gui.add(settings, 'roughness')
