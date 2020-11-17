@@ -233,8 +233,8 @@ void main()
         envUV.x = atan( r.z, r.x ) * RECIPROCAL_PI*0.5 + 0.5;
         vec3 F;
 		if(applyAiry){
-        	F = Airy(n, l, v);
-			F = F + FSchlick( max(dot(n, v), EPS));
+        	//F = Airy(n, l, v);
+			F = FSchlick( max(dot(n, v), EPS));
     	} else {
         	F = FSchlick( max(dot(n, v), EPS));
     	}
@@ -245,6 +245,6 @@ void main()
     vec3 radiance = (metalness * directLightRadiance) + 
 					((1.0 - metalness) * baseColor / PI) + 
 					indirLightRadiance;
-
+					
     gl_FragColor = vec4(pow(radiance, vec3(1.0/2.2)), 1.0);
 }
