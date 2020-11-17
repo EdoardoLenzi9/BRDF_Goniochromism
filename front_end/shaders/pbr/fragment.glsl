@@ -213,7 +213,7 @@ void main()
         vec3 I = Airy(n, l, v);
 		float G = smithG_GGX(NdotL, NdotV, alpha);
 		float D = GGX(NdotH, alpha);
-		directLightRadiance = pointLightColor * NdotL * ( I * G * D ) / 4.0;
+		directLightRadiance = PI * pointLightColor * NdotL * ( I * G * D ) / 4.0;
     } else {
         vec3 F = FSchlick(LdotH);
 		float G = GSmith(NdotV, NdotL, alpha2);
@@ -242,6 +242,9 @@ void main()
         indirLightRadiance += refEnvColor;
     }
 
-    vec3 radiance = directLightRadiance + indirLightRadiance;
+    vec3 radiance = (metalness * directLightRadiance) + 
+					((1.0 - metalness) * baseColor / PI) + 
+					indirLightRadiance;
+					
     gl_FragColor = vec4(pow(radiance, vec3(1.0/2.2)), 1.0);
 }
