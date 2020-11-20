@@ -5,20 +5,35 @@
 --- 
 ## Get Started
 
+Download the required `node_modules` for front-end and back-end
+
 ```{sh}
 git clone https://github.com/EdoardoLenzi9/BRDF_Goniochromism.git
 cd BRDF_Goniochromism
 # git checkout dev
 npm install
+```
+
+Start the web server (http://localhost:8080)
+
+```{sh}
 node index.js
 # see http://localhost:8080
 ```
 
+Download the required dependencies for Python3
 
 ```{sh}
 python3 -m pip install -r requirements.txt
+```
+
+Run the python script
+
+```{sh}
 python3 image_processing.py -h
 ```
+
+You shoud see something like this:
 
 ```
 usage: image_processing.py [-h] [--diff N N]
@@ -44,13 +59,24 @@ optional arguments:
 Source: https://github.com/EdoardoLenzi9/BRDF_Goniochromism
 ```
 
+Compare two images
+
 ```
 python3 image_processing.py --diff assets/images/test0.jpg assets/images/test1.jpg
-# this should generate 3 images:
-# 1. /assets/images/diff_test0.py
-# 2. /assets/images/diff_test1.py
-# 3. /assets/images/diff.py
 ```
+
+this should generate 3 images:
+1. `/assets/images/diff_test0.py`
+2. `/assets/images/diff_test1.py`
+3. `/assets/images/diff.py`
+
+![](assets/images/ui3.jpg)
+
+
+## UI Tour
+
+![](assets/images/ui1.jpg)
+![](assets/images/ui2.jpg)
 
 ---
 ## Disclamer 

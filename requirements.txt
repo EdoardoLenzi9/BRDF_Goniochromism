@@ -3,9 +3,9 @@ numpy
 tqdm
 argparse
 python-dotenv
-torch
-sklearn
+#torch
+#sklearn
 psutil
-SQLAlchemy
+#SQLAlchemy
 shutil
 Pillow
