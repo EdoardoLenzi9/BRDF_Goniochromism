@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+documentation/
+.vscode/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc 

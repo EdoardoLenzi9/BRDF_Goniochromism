@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>Goniochromismn</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Microfacet theory extension for BRDF goniochromism">
+		<meta name="keywords" content="brdf, goniochromism">
+		<meta name="author" content="Edoardo Lenzi">
+		<meta name="license" content="WTFPL-2.0">
+		<meta http-equiv="content-language" content="en">
+		<link rel="shortcut icon" href="favicon.ico">
+
+		<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="index.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<article id="inspect" class="bg-green full-panel">
+			<h2 >GONIOCHROMISM BRDF</h2>
+			<br/>
+			<div id="view-container">
+				<iframe id="chair-view" src="views/chair/chair.html"></iframe>
+				<button onclick="OpenFullscreen('chair-view')">FULL SCREEN</button>
+				<button onclick="downloadImage('chair-view')">SCREENSHOT</button>
+				<button onclick="saveAll('chair-view')">SCREENSHOT-ALL</button>
+				<input id="settings" type="text" value="default_settings.json" placeholder="default_settings.json">
+				<button onclick="loadConfigs($('#settings')[0].value, 'chair-view')">LOAD CONFIGS</button>
+			</div>
+		</article>
+		<!--Footer-->
+		<footer class="footer">
+			Edoardo Lenzi - UniUd - License WTFPL-2.0 - 2020 
+		</footer>
+		
+		<script src="jquery/dist/jquery.min.js"></script>
+		<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="utils/http-client.js"></script>
+		<script src="index.js"></script>
+		<script src="utils/utils.js"></script>
+	</body>
+</html>

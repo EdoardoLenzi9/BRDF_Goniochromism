@@ -1,0 +1,11 @@
+pandas
+numpy
+tqdm
+argparse
+python-dotenv
+#torch
+#sklearn
+psutil
+#SQLAlchemy
+shutil
+Pillow
