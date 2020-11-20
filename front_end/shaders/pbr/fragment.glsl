@@ -208,17 +208,18 @@ void main()
 	float NdotV = max(dot(n, v), EPS);
     float alpha2 = alpha*alpha;
 	vec3 directLightRadiance;
+    vec3 I = Airy(n, l, v);
+	vec3 FNdotV = FSchlick( NdotV );
+	vec3 FLdotH = FSchlick( LdotH );
 
     if(applyAiry){
-        vec3 I = Airy(n, l, v);
 		float G = smithG_GGX(NdotL, NdotV, alpha);
 		float D = GGX(NdotH, alpha);
 		directLightRadiance = PI * pointLightColor * NdotL * ( I * G * D ) / 4.0;
     } else {
-        vec3 F = FSchlick(LdotH);
 		float G = GSmith(NdotV, NdotL, alpha2);
 		float D = DGGX(NdotH, alpha2);
-		directLightRadiance = pointLightColor * NdotL * ( F * G * D ) / 4.0;
+		directLightRadiance = pointLightColor * NdotL * ( FLdotH * G * D ) / 4.0;
     }
 
     //Indirect light calculation
@@ -233,17 +234,16 @@ void main()
         envUV.x = atan( r.z, r.x ) * RECIPROCAL_PI*0.5 + 0.5;
         vec3 F;
 		if(applyAiry){
-        	F = Airy(n, l, v);
-			F = F + FSchlick( max(dot(n, v), EPS));
+        	F = I + FNdotV;
     	} else {
-        	F = FSchlick( max(dot(n, v), EPS));
+        	F = FNdotV;
     	}
         vec3 refEnvColor = pow(texture2D(envMap, envUV).rgb, vec3(2.2)) * F;
         indirLightRadiance += refEnvColor;
     }
 
     vec3 radiance = (metalness * directLightRadiance) + 
-					((1.0 - metalness) * baseColor / PI) + 
+					((1.0 - metalness) * (1.0 - FLdotH) * baseColor / PI) + 
 					indirLightRadiance;
 
     gl_FragColor = vec4(pow(radiance, vec3(1.0/2.2)), 1.0);
