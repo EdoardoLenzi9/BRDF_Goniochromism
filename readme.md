@@ -10,7 +10,6 @@ Download the required `node_modules` for front-end and back-end
 ```{sh}
 git clone https://github.com/EdoardoLenzi9/BRDF_Goniochromism.git
 cd BRDF_Goniochromism
-# git checkout dev
 npm install
 ```
 
