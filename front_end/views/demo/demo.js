@@ -66,7 +66,7 @@ function Init() {
 							settings.z);
 		group.scale.set( 100, 100, 100 );
 		group.position.set( group.position.x, 
-							group.position.y - 50, 
+							group.position.y - 100, 
 							group.position.z );
 		scene.add( group );
 		Animate();
