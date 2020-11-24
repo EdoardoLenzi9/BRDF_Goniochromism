@@ -22,13 +22,13 @@ var todo = new Set([
 ]);
 
 
-function InitMaterials()
+function InitMaterials(envMapName = 'envmap_mip')
 {
     // Load GUI settings
     LoadSettings()
 
     // Environment map loading
-    LoadEnvMaps();
+    LoadEnvMaps(envMapName);
  
     // Load glsl shaders from file
     LoadGlsl('../../shaders/pbr/fragment.glsl');
@@ -43,11 +43,11 @@ function InitMaterials()
 */
 var loadedMipmaps = 0;
 
-function LoadEnvMaps()
+function LoadEnvMaps(envMapName)
 {
     for( var i = 0; i <= 8; i++ )
     {
-        var filename = '../../textures/envmap_mip' + String(i) + '.png';
+        var filename = '../../textures/' + envMapName + String(i) + '.png';
         var thisTex = LoadTexture( filename );
         environmentMaps.push( thisTex );
     }

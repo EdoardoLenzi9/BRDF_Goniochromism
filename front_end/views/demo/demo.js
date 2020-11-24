@@ -33,7 +33,7 @@ var pbrMaterial;
 * Init function
 */ 
 function Init() {
-	InitMaterials();
+	InitMaterials('church_mip');
 	
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );

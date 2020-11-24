@@ -91,7 +91,11 @@ this should generate 3 images:
 
 * See also [A Practical Extension to Microfacet Theory for the Modeling of Varying Iridescence](https://blogs.unity3d.com/2017/05/09/a-practical-extension-to-microfacet-theory-for-the-modeling-of-varying-iridescence/)
 * [Chair](https://www.turbosquid.com/3d-models/3d-banquette---v-ray-model-1530280)
-
+* Thanks to **MasterXeon1001**, **Geoffrey Marchal**, and **Neil Taylor** for their models:
+  * [Robot](https://blendswap.com/blend/10356) big thanks to **masterxeon1001**
+  * [Beetle](https://blendswap.com/blend/22828) big thanks to **parasar**
+  * [Boar](https://blendswap.com/blend/17982) big thanks to **geoffreymarchal**
+* [EnvMap](https://texturify.com/content/10578/Free%20Panorama_sphere%20in%20church.jpg) big thanks to **texturify**
 
 ---
 > License: WTFPL-2.0
