@@ -47,6 +47,7 @@ var refreshSettings = function(index){
 var updatePBR = function(_){
     InitPBR();
     group.children[0].material = pbrMaterial;
+    group.children[1].material = pbrMaterial;
 }
 
 
