@@ -84,7 +84,6 @@ function InitMesh( ) {
 	}
 	var loader = new THREE.GLTFLoader();
 	loader.load( "../../models/demo2.glb", function( gltf ) {
-		debugger
 		var gltfMesh = gltf.scene.children[0];
 		gltfMesh.material = pbrMaterial;
 		group.add(gltfMesh);

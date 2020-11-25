@@ -8,22 +8,16 @@ varying vec3 vWorldPosition;
 uniform vec3 baseColor;
 uniform float metalness;
 uniform vec3 pointLightWorldPosition;
-uniform vec3 pointLightWorldPosition2;
-uniform vec3 pointLightWorldPosition3;
-uniform vec3 pointLightWorldPosition4;
 uniform vec3 pointLightColor;
 uniform vec3 envLightColor;
 uniform sampler2D envMap;
 uniform bool hasEnvMap;
 uniform bool applyAiry;
-
 uniform float Dinc;
 uniform float eta2;
 uniform float eta3;
 uniform float kappa3;
 uniform float alpha; // roughness
-
-uniform vec4 enableLight;
 
 const float PI = 3.14159265358979323846;
 
@@ -199,9 +193,9 @@ vec3 InverseTransformDirection( in vec3 dir, in mat4 matrix ) {
 }
 
 
-vec3 directPointLightRadiance( vec3 wPointLightWorldPosition ) {
-
-    vec4 vPointLightPosition = viewMatrix * vec4(wPointLightWorldPosition, 1.0);
+void main()
+{
+    vec4 vPointLightPosition = viewMatrix * vec4(pointLightWorldPosition, 1.0);
 
     //Direct light calculation
     vec3 l = normalize(vPointLightPosition.xyz - vViewPosition.xyz);
@@ -218,37 +212,18 @@ vec3 directPointLightRadiance( vec3 wPointLightWorldPosition ) {
 	vec3 FNdotV = FSchlick( NdotV );
 	vec3 FLdotH = FSchlick( LdotH );
 
-	float G;
-	float D;
-
     if(applyAiry){
-		G = smithG_GGX(NdotL, NdotV, alpha);
-		D = GGX(NdotH, alpha);
+		float G = smithG_GGX(NdotL, NdotV, alpha);
+		float D = GGX(NdotH, alpha);
 		directLightRadiance = PI * pointLightColor * NdotL * ( I * G * D ) / 4.0;
     } else {
-		G = GSmith(NdotV, NdotL, alpha2);
-		D = DGGX(NdotH, alpha2);
+		float G = GSmith(NdotV, NdotL, alpha2);
+		float D = DGGX(NdotH, alpha2);
 		directLightRadiance = pointLightColor * NdotL * ( FLdotH * G * D ) / 4.0;
     }
-	return directLightRadiance;
-}
 
-
-vec3 indirectPointLightRadiance( vec3 wPointLightWorldPosition ) {
- 	vec3 indirLightRadiance;
-    vec4 vPointLightPosition = viewMatrix * vec4(wPointLightWorldPosition, 1.0);
-
-    //Direct light calculation
-    vec3 l = normalize(vPointLightPosition.xyz - vViewPosition.xyz);
-    vec3 v = normalize(-vViewPosition);
-    vec3 h = normalize(l + v);
-    vec3 n = normalize(vNormal);
-	float LdotH = max(dot(l, h), EPS);
-	float NdotH = max(dot(n, h), EPS);
-	float NdotV = max(dot(n, v), EPS);
-    vec3 I = Airy(n, l, v);
-	vec3 FNdotV = FSchlick( NdotV );
-
+    //Indirect light calculation
+    vec3 indirLightRadiance = envLightColor * baseColor;
 
     if(hasEnvMap){
         vec2 envUV;
@@ -258,62 +233,17 @@ vec3 indirectPointLightRadiance( vec3 wPointLightWorldPosition ) {
         envUV.y = asin( clamp( r.y, - 1.0, 1.0 ) ) * RECIPROCAL_PI + 0.5;
         envUV.x = atan( r.z, r.x ) * RECIPROCAL_PI*0.5 + 0.5;
         vec3 F;
-        vec3 refEnvColor = pow(texture2D(envMap, envUV).rgb, vec3(2.2));
-
 		if(applyAiry){
-        	F = I;
-		} else {
+        	F = I + FNdotV;
+    	} else {
         	F = FNdotV;
-		}
-		indirLightRadiance = refEnvColor * F;
+    	}
+        vec3 refEnvColor = pow(texture2D(envMap, envUV).rgb, vec3(2.2)) * F;
+        indirLightRadiance += refEnvColor;
     }
 
-	return indirLightRadiance;
-}
-
-
-vec3 fldoth( vec3 wPointLightWorldPosition ) {
-
-    vec4 vPointLightPosition = viewMatrix * vec4(wPointLightWorldPosition, 1.0);
-
-    //Direct light calculation
-    vec3 l = normalize(vPointLightPosition.xyz - vViewPosition.xyz);
-	vec3 v = normalize(-vViewPosition);
-    vec3 h = normalize(l + v);
-	float LdotH = max(dot(l, h), EPS);
-	return FSchlick( LdotH );
-}
-
-
-void main()
-{
-	vec3 directLightRadiance = vec3(0,0,0);
-    vec3 indirLightRadiance = envLightColor * baseColor;
-	vec3 fldoth_index =  vec3(0,0,0);
-	if( enableLight.x > 0.0 ) {
-		directLightRadiance += directPointLightRadiance( pointLightWorldPosition );
-		indirLightRadiance += indirectPointLightRadiance( pointLightWorldPosition );
-		fldoth_index += fldoth( pointLightWorldPosition );
-	}
-	if( enableLight.y > 0.0 ) {
-		directLightRadiance += directPointLightRadiance( pointLightWorldPosition2 );
-		indirLightRadiance += indirectPointLightRadiance( pointLightWorldPosition2 );
-		fldoth_index += fldoth( pointLightWorldPosition2 );
-	}
-	if( enableLight.z > 0.0 ) {
-		directLightRadiance += directPointLightRadiance( pointLightWorldPosition3 );
-		indirLightRadiance += indirectPointLightRadiance( pointLightWorldPosition3 );
-		fldoth_index += fldoth( pointLightWorldPosition3 );
-	}
-	if( enableLight.a > 0.0 ) {
-		directLightRadiance += directPointLightRadiance( pointLightWorldPosition4 );
-		indirLightRadiance += indirectPointLightRadiance( pointLightWorldPosition4 );
-		fldoth_index += fldoth( pointLightWorldPosition4 );
-	}
-
-
     vec3 radiance = (metalness * directLightRadiance) + 
-					((1.0 - metalness) * (1.0 - fldoth_index) * baseColor / PI) + 
+					((1.0 - metalness) * (1.0 - FLdotH) * baseColor / PI) + 
 					indirLightRadiance;
 
     gl_FragColor = vec4(pow(radiance, vec3(1.0/2.2)), 1.0);

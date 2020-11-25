@@ -4,6 +4,7 @@
 
 
 var gui = new dat.GUI();
+var light_gui = new dat.GUI();
 
 
 /*
@@ -37,6 +38,10 @@ var refreshSettings = function(index){
     settings.eta3 = configs[index].eta3
     settings.kappa3 = configs[index].kappa3
     settings.alpha = configs[index].alpha 
+    settings.light1 = configs[index].light1 
+    settings.light2 = configs[index].light2 
+    settings.light3 = configs[index].light3 
+    settings.light4 = configs[index].light4 
     settings.config = index
 }
 
@@ -47,7 +52,7 @@ var refreshSettings = function(index){
 var updatePBR = function(_){
     InitPBR();
     group.children[0].material = pbrMaterial;
-    group.children[1].material = pbrMaterial;
+    // group.children[1].material = pbrMaterial;
 }
 
 
@@ -121,22 +126,35 @@ var initGUI = function(){
 
 
     gui.add(settings, 'dinc')
-        .min(0).max(20).step(0.01)
+        .min(0).max(10).step(0.01)
         .listen().onChange(updatePBR);
 
 
     gui.add(settings, 'eta2')
-        .min(0).max(20).step(1)
+        .min(1).max(5).step(0.01)
         .listen().onChange(updatePBR);
 
 
     gui.add(settings, 'eta3')
-        .min(0).max(20).step(1)
+        .min(1).max(5).step(0.01)
         .listen().onChange(updatePBR);
 
 
     
     gui.add(settings, 'kappa3')
-        .min(0).max(5).step(1)
+        .min(0).max(5).step(0.01)
+        .listen().onChange(updatePBR);
+
+
+    light_gui.add(settings, 'light1')
+        .listen().onChange(updatePBR);
+
+    light_gui.add(settings, 'light2')
+        .listen().onChange(updatePBR);
+
+    light_gui.add(settings, 'light3')
+    .listen().onChange(updatePBR);
+
+    light_gui.add(settings, 'light4')
         .listen().onChange(updatePBR);
 }

@@ -33,7 +33,7 @@ var pbrMaterial;
 * Init function
 */ 
 function Init() {
-	InitMaterials();
+	InitMaterials('church_mip');
 	
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
@@ -80,7 +80,6 @@ function Init() {
 function InitMesh( ) {
 	var loader = new THREE.GLTFLoader();
 	loader.load( "../../models/seated-wild-boar/boar.glb", function( gltf ) {
-		debugger
 		var gltfMesh = gltf.scene.children[0];
 		gltfMesh.material = pbrMaterial;
 		group.add(gltfMesh);

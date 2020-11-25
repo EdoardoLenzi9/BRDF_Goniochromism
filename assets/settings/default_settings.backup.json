@@ -3,8 +3,8 @@
         "name": "c1",
         "baseColor": "#5bc81f",
         "lockView": false,    
-        "dirLightColor": "#ffffff",
-        "dirLight": 0.1,
+        "dirLightColor": "#305ae1",
+        "dirLight": 1,
         "hemiLightColor": "#e89d9d",
         "hemiLight": 0.02,
         "envMap": true,
@@ -13,15 +13,11 @@
         "x": 0,
         "y": 0,
         "z": 0,
-        "dinc": 1.38,
-        "eta2": 1.288,
-        "eta3": 3.252,
-        "kappa3": 0.84,
-        "alpha": 0.26443,
-        "light1": false,
-        "light2": false,
-        "light3": true,
-        "light4": true
+        "dinc": 1.0,
+        "eta2": 1.0,
+        "eta3": 10.0,
+        "kappa3": 3.0,
+        "alpha": 0.13
     },
     {
         "name": "c2",
@@ -41,11 +37,7 @@
         "eta2": 5.0,
         "eta3": 5.0,
         "kappa3": 5.0,
-        "alpha": 1.0,
-        "light1": false,
-        "light2": false,
-        "light3": true,
-        "light4": true
+        "alpha": 1.0
     },
     {
         "name": "c3",
@@ -65,11 +57,7 @@
         "eta2": 2.0,
         "eta3": 3.0,
         "kappa3": 0.0,
-        "alpha": 0.01,
-        "light1": false,
-        "light2": false,
-        "light3": true,
-        "light4": true
+        "alpha": 0.01
     },
     {
         "name": "c4",
@@ -89,10 +77,6 @@
         "eta2": 2.0,
         "eta3": 3.0,
         "kappa3": 0.0,
-        "alpha": 0.01,
-        "light1": false,
-        "light2": false,
-        "light3": true,
-        "light4": true
+        "alpha": 0.01
     }
 ]

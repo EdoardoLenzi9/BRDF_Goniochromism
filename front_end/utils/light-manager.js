@@ -23,7 +23,7 @@ function CreateHemiLight(){
 function CreateDirLight(){
     var dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
 	dirLight.color.setHSL( 0.1, 1, 0.95 );
-	dirLight.position.set( -1, 1.75, 1 );
+	dirLight.position.set( -1000, 100, 100 );
 	dirLight.position.multiplyScalar( 50 );
 	dirLight.castShadow = true;
 	dirLight.shadow.mapSize.width = 1024;

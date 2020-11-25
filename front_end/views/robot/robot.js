@@ -33,7 +33,7 @@ var pbrMaterial;
 * Init function
 */ 
 function Init() {
-	InitMaterials();
+	InitMaterials('church_mip');
 	
 	// general events
 	BindEvent( window, 'resize', OnWindowResize );
@@ -64,7 +64,7 @@ function Init() {
 		group.rotation.set( settings.x, 
 							settings.y, 
 							settings.z);
-		group.scale.set( 20, 20, 20 );
+		group.scale.set( 25, 25, 25 );
 		group.position.set( group.position.x, 
 							group.position.y - 10, 
 							group.position.z );
@@ -80,7 +80,6 @@ function Init() {
 function InitMesh( ) {
 	var loader = new THREE.GLTFLoader();
 	loader.load( "../../models/robot-bust-bam/RobotArticle1.glb", function( gltf ) {
-		debugger
 		var gltfMesh = gltf.scene.children[0];
 		gltfMesh.material = pbrMaterial;
 		group.add(gltfMesh);
