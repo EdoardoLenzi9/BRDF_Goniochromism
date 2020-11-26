@@ -1,11 +1,11 @@
 [
     {
         "name": "c1",
-        "baseColor": "#5bc81f",
+        "baseColor": "#ffffff",
         "lockView": false,    
         "dirLightColor": "#ffffff",
         "dirLight": 0.1,
-        "hemiLightColor": "#e89d9d",
+        "hemiLightColor": "#ffffff",
         "hemiLight": 0.02,
         "envMap": true,
         "goniochromism": true,
@@ -26,7 +26,7 @@
     {
         "name": "c2",
         "baseColor": "#5bc81f",
-        "lockView": false,    
+        "lockView": true,    
         "dirLightColor": "#305ae1",
         "dirLight": 1,
         "hemiLightColor": "#e89d9d",
@@ -50,7 +50,7 @@
     {
         "name": "c3",
         "baseColor": "#5bc81f",
-        "lockView": false,    
+        "lockView": true,    
         "dirLightColor": "#305ae1",
         "dirLight": 1,
         "hemiLightColor": "#e89d9d",
@@ -74,7 +74,7 @@
     {
         "name": "c4",
         "baseColor": "#5bc81f",
-        "lockView": false,    
+        "lockView": true,    
         "dirLightColor": "#305ae1",
         "dirLight": 1,
         "hemiLightColor": "#e89d9d",

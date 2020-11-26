@@ -64,7 +64,7 @@ function Init() {
 		group.rotation.set( settings.x, 
 							settings.y, 
 							settings.z);
-		group.scale.set( 100, 100, 100 );
+		group.scale.set( 70, 70, 70 );
 		group.position.set( group.position.x, 
 							group.position.y - 10, 
 							group.position.z );
